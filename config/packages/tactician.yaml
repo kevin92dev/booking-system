@@ -1,0 +1,7 @@
+tactician:
+    commandbus:
+        default:
+            middleware:
+                - App\Infrastructure\UI\Middleware\ExceptionMiddleware
+                - tactician.middleware.validator
+                - tactician.middleware.command_handler

@@ -1,0 +1,24 @@
+App\Application\Command\BookingListRequest:
+    properties:
+        bookingsRequest:
+            - All:
+                - Collection:
+                    fields:
+                        request_id:
+                            - NotBlank: { message: "The request_id field cannot be null" }
+                        check_in:
+                            - NotBlank: { message: "The check_in field cannot be null." }
+                            - Date: { message: "The check_in field must be a date." }
+                        nights:
+                            - NotBlank: { message: "The nights field cannot be null." }
+                            - Type: { type: integer, message: "The nights field value must be a positive integer" }
+                            - GreaterThan: { value: 0, message: "The nights field value must be a positive integer" }
+                        selling_rate:
+                            - NotBlank: { message: "The selling_rate field cannot be null." }
+                            - Type: { type: integer, message: "The selling_rate field value must be a positive integer" }
+                            - GreaterThan: { value: 0, message: "The selling_rate field value must be a positive integer" }
+                        margin:
+                            - NotBlank: { message: "The margin field cannot be null." }
+                            - Type: { type: integer, message: "The margin field value must be a positive integer" }
+                            - GreaterThan: { value: 0, message: "The margin field value must be a positive integer" }
+                            - LessThan: { value: 100, message: "The margin cannot be greater than 100" }
