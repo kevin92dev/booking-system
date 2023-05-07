@@ -1,4 +1,13 @@
 # Booking Management
+## How does it work?
+This application will help you to maximize your profit when you have to decide how to handle the booking of your 
+property.
+
+This application exposes two endpoints ```/stats``` and ```/maximize```. The ```/stats``` endpoint will give you the 
+average profit you're getting for a list of bookings. The awesome ```/maximize``` endpoint will 
+give you the best booking combination to get the maximum profit from your rentals, you just need to provide the 
+bookings you can have, it will do the job for you.
+
 ## How to install
 1. Clone the repository
 2. Run ```composer start```
