@@ -2,11 +2,13 @@
 
 namespace App\Domain\Model;
 
+use DateTimeImmutable;
+
 readonly class Booking
 {
     private function __construct(
         private string $requestId,
-        private \DateTimeImmutable $checkIn,
+        private DateTimeImmutable $checkIn,
         private int $numberOfNights,
         private int $sellingRate,
         private int $marginPercentage
@@ -23,7 +25,7 @@ readonly class Booking
     {
         return new self(
             $data['request_id'],
-            new \DateTimeImmutable($data['check_in']),
+            new DateTimeImmutable($data['check_in']),
             $data['nights'],
             $data['selling_rate'],
             $data['margin']
@@ -100,10 +102,10 @@ readonly class Booking
             }
 
             if (!$overlaps) {
-                $newCurrentCombination = $currentCombination;
-                $newCurrentCombination->appendBooking($booking);
+                $newCurrentCombi = $currentCombination;
+                $newCurrentCombi->appendBooking($booking);
                 $newRemaining = array_slice($remainingBookings, $index + 1);
-                self::generateCombinations($newCurrentCombination, $newRemaining, $maxProfit, $bestCombination);
+                self::generateCombinations($newCurrentCombi, $newRemaining, $maxProfit, $bestCombination);
             }
         }
 
