@@ -9,7 +9,8 @@ abstract class BookingListRequest
      */
     public function __construct(
         private readonly array $bookingsRequest
-    ) {}
+    ) {
+    }
 
     /**
      * @return array

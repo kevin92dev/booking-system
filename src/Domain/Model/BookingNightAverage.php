@@ -8,7 +8,8 @@ readonly class BookingNightAverage implements \JsonSerializable
         private float $averageNightProfit,
         private float $minimumNightProfit,
         private float $maximumNightProfit
-    ) {}
+    ) {
+    }
 
     public function jsonSerialize(): array
     {

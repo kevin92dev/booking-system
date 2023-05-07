@@ -19,13 +19,20 @@
     }
     ,
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "fakerphp/faker": "^1.21",
+        "infection/infection": "^0.26.21",
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-latest",
+        "symfony/browser-kit": "6.2.*",
+        "symfony/css-selector": "6.2.*",
+        "symfony/phpunit-bridge": "^6.2"
     },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "infection/extension-installer": true
         },
         "sort-packages": true
     },
@@ -58,7 +65,11 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "start": "docker-compose --file docker/docker-compose.yml up -d",
+        "tests": "docker exec -it php bin/phpunit",
+        "tests-coverage": "docker exec -it php bin/phpunit --coverage-html var/coverage",
+        "mutant-tests": "docker exec -it php ./vendor/infection/infection/bin/infection"
     },
     "conflict": {
         "symfony/symfony": "*"

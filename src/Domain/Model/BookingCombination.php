@@ -6,7 +6,8 @@ class BookingCombination implements \JsonSerializable
 {
     public function __construct(
         private array $bookings
-    ) {}
+    ) {
+    }
 
     public function appendBooking(Booking $booking): void
     {
@@ -23,16 +24,24 @@ class BookingCombination implements \JsonSerializable
 
     public function calculateCombinationProfit(): float
     {
-        return array_sum(array_map(static function(Booking $booking) {
-            return $booking->totalProfit();
-        }, $this->bookings));
+        return array_sum(
+            array_map(
+                static function (Booking $booking) {
+                    return $booking->totalProfit();
+                },
+                $this->bookings
+            )
+        );
     }
 
     public function jsonSerialize(): array
     {
-        $requestIds = array_map(static function(Booking $booking) {
-            return $booking->getRequestId();
-        }, $this->bookings);
+        $requestIds = array_map(
+            static function (Booking $booking) {
+                return $booking->getRequestId();
+            },
+            $this->bookings
+        );
 
         $nightProfit = Booking::calculateNightProfit($this->bookings);
 

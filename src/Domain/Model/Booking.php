@@ -10,7 +10,8 @@ readonly class Booking
         private int $numberOfNights,
         private int $sellingRate,
         private int $marginPercentage
-    ) {}
+    ) {
+    }
 
     /**
      * @param array $data
@@ -36,9 +37,12 @@ readonly class Booking
      */
     public static function calculateNightProfit(array $bookings): BookingNightAverage
     {
-        $bookingNightProfits = array_map(static function (Booking $booking) {
-            return $booking->profitPerNight();
-        }, $bookings);
+        $bookingNightProfits = array_map(
+            static function (Booking $booking) {
+                return $booking->profitPerNight();
+            },
+            $bookings
+        );
 
         return new BookingNightAverage(
             round(array_sum($bookingNightProfits) / count($bookingNightProfits), 2),
@@ -66,8 +70,8 @@ readonly class Booking
 
     /**
      * @param BookingCombination $currentCombination
-     * @param array $remainingBookings
-     * @param float $maxProfit
+     * @param array              $remainingBookings
+     * @param float              $maxProfit
      * @param BookingCombination $bestCombination
      *
      * @return BookingCombination
@@ -122,7 +126,7 @@ readonly class Booking
         return $this->sellingRate * ($this->marginPercentage / 100);
     }
 
-    private function profitPerNight(): float
+    public function profitPerNight(): float
     {
         return $this->totalProfit() / $this->numberOfNights;
     }
@@ -149,5 +153,21 @@ readonly class Booking
     public function getNumberOfNights(): int
     {
         return $this->numberOfNights;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSellingRate(): int
+    {
+        return $this->sellingRate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMarginPercentage(): int
+    {
+        return $this->marginPercentage;
     }
 }
